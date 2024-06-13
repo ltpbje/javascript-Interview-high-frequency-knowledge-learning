@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何确认this的值</title>
+</head>
+<body>
+    <h2>如何确认this的值</h2>
+    <script>
+       /* 如何确认this的值
+            1.全局执行环境
+            2.函数内部
+                2.1直接调用
+                2.2对象方法调用
+     ----------- 1.全局执行环境--------   */
+        // 严格模式，非严格模式 全局对象（window）
+            // 'use strict'
+            // console.log(this)
+    //  -------------------2.函数内部--------------
+        // 2.1直接调用-非严格模式
+        // function func(){
+        //     console.log(this) // window
+        // }
+        // func()
+        // 2.1直接调用 - 严格模式
+        function func (){
+            'use strict'
+            console.log(this) // undefined
+        }
+        func()
+
+    </script>
+</body>
+</html>
