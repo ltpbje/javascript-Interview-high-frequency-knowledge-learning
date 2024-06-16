@@ -20,14 +20,21 @@
      *  2.如何提交数据?
      * */
     document.querySelector('.ipt').addEventListener('change', async function () {
-     
+      const img= this.files[0]
+      const data= new FormData()
+      data.append('img',img)
       // console.log(img)
       // 1.如何设置请求方法?
       // 2.如何提交数据?
+      const res =await fetch('https://hmajax.itheima.net/api/uploadimg',{
         // 请求方法
+        method:'POST',
         // 提交的数据
-
+        body:data
+      })
+      const resData = await res.json()
       // 回显
+      document.querySelector('.icon').src =resData.data.url 
     })
   </script>
 </body>
