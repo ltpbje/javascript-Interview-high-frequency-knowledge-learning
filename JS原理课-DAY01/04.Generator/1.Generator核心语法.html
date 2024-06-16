@@ -17,16 +17,26 @@
      *  3. next方法
      *  4. for of
      * */
-    // 1. 定义生成器函数
-    
-    // 2. 获取 Generator对象
 
+    // 1. 定义生成器函数
+    function* itheimaGenerator(){
+      console.log('itheimaGenerator执行了')
+      yield 'it'
+      yield 'heima'
+      yield '666'
+
+    }  
+    // 2. 获取 Generator对象
+    const itheima = itheimaGenerator()
     // 3. next方法
     // {value:'yield之后的值',done:false/true}
     // done: 是否执行完毕,false 可以继续执行, true 已经执行完毕
     // value: yield之后的值
 
     // 4. for of
+    for(const iterator of itheima){
+      console.log(iterator)
+    }
   </script>
 </body>
 
