@@ -19,14 +19,14 @@
      * */
     // 通过变量保存状态,便于后续使用
     // ctrl+shift+p 转为大写
-    const PENDING = 'pending'
+    const PENDING   = 'pending'
     const FULFILLED = 'fulfilled'
     const REJECTED = 'rejected'
     class HMPromise {
       // 1. 添加状态
-      state = PENDING
+      state =PENDING
       // 2. 添加原因
-      result = undefined
+      result=undefined
 
       constructor(func) {
         // 3. 调整resolve/reject
@@ -34,15 +34,15 @@
         // 改状态: pending->fulfilled
         // 记录原因
         const resolve = (result) => {
-          if (this.state === PENDING) {
+          if(this.state === PENDING){            
             this.state = FULFILLED
-            this.result = result
-          }
+            this.result =result
+          }        
         }
         // 改状态: pending->rejected
         // 记录原因
         const reject = (result) => {
-          if (this.state === PENDING) {
+          if (this.state === PENDING){
             this.state = REJECTED
             this.result = result
           }
