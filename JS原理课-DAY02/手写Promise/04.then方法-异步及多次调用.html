@@ -25,8 +25,9 @@
       state = PENDING
       // 原因
       result = undefined
+      
       // 1. 定义实例属性
-      #handlers = [] // [{onFulfilled,onRejected}...]
+      #headlers = [] // [{onFulfilled,onRejected}...]
 
       // 构造函数
       constructor(func) {
@@ -36,7 +37,7 @@
             this.state = FULFILLED
             this.result = result
             // 3. 调用成功回调
-            this.#handlers.forEach(({ onFulfilled }) => {
+            this.#headlers.forEach(({onFulfilled})=>{
               onFulfilled(this.result)
             })
           }
@@ -47,7 +48,7 @@
             this.state = REJECTED
             this.result = result
             // 4. 调用失败回调
-            this.#handlers.forEach(({ onRejected }) => {
+            this.#headlers.forEach(({ onRejected }) => {
               onRejected(this.result)
             })
           }
@@ -66,8 +67,8 @@
           onRejected(this.result)
         } else if (this.state === PENDING) {
           // 2. 保存回调函数
-          this.#handlers.push({
-            onFulfilled, onRejected
+          this.#headlers.push({
+            onFulfilled,onRejected
           })
         }
       }
