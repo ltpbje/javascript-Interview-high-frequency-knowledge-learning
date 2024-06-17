@@ -48,16 +48,18 @@
       // 1. 添加实例方法
       then(onFulfilled, onRejected) {
         // 2. 参数判断(参考文档)
-        onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : x => x
-        onRejected = typeof onRejected === 'function' ? onRejected : x => { throw x }
+        onFulfilled= typeof onFulfilled === 'function' ? onFulfilled : x=>x
+        onRejected= typeof onRejected === 'function' ? onRejected : x=>{throw x}
 
         // 2.1 执行成功回调
-        // 2.2 执行失败回调
-        if (this.state === FULFILLED) {
+        if(this.state === FULFILLED){
           onFulfilled(this.result)
-        } else if (this.state === REJECTED) {
+        }
+        // 2.2 执行失败回调
+        if(this.state === REJECTED){
           onRejected(this.result)
         }
+       
       }
     }
 
