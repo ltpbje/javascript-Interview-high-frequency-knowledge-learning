@@ -19,16 +19,19 @@
     // 1. 定义函数
     function runAsynctask(callback) {
       // 2. 调用核心api(queueMicrotask,MutationObserver,setTimeout)
-      if (typeof queueMicrotask === 'function') {
-        queueMicrotask(callback)
-      } else if (typeof MutationObserver === 'function') {
-        const obs = new MutationObserver(callback)
-        const divNode = document.createElement('div')
-        obs.observe(divNode, { childList: true })
-        divNode.innerText = 'itheima666'
-      } else {
-        setTimeout(callback, 0)
-      }
+    if(typeof queueMicrotask === 'function'){
+      queueMicrotask(callback)
+    }else if(typeof MutationObserver === 'function'){
+      const obs = new MutationObserver(callback)
+      const divNode = document.createElement('div')
+      obs.observe(divNode,{childList:true})
+      divNode.innerHTML = 'itheima666'
+    }else{
+      // setTimeout 兜底 以防不兼容
+      setTimeout(() => {
+        callback
+      }, 0);
+    }
     }
 
 
@@ -92,11 +95,11 @@
           })
         } else if (this.state === PENDING) {
           this.#handlers.push({
-            onFulfilled: () => {
+            onFulfilled:()=>{
               runAsynctask(() => {
                 onFulfilled(this.result)
               })
-            }, onRejected: () => {
+            }, onRejected:()=>{
               runAsynctask(() => {
                 onRejected(this.result)
               })
