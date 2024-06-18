@@ -100,22 +100,27 @@
      * */
 
     // ------------- 异步任务1 queueMicrotask  -------------
-    console.log('1')
-    queueMicrotask(()=>{
-      console.log('queueMicrotask');
-    })
-    console.log('2');
+    // console.log('1')
+    // queueMicrotask(()=>{
+    //   console.log('queueMicrotask');
+    // })
+    // console.log('2');
 
 
     // ------------- 异步任务2 MutationObserver -------------
-    // console.log('1')
+    console.log('1')
     // 1. 创建观察器,并传入回调函数
-   
+    const obs =new MutationObserver(()=>{
+      console.log('MutationObserver')
+    })
     // 2. 创建元素,并添加监听
     // 参数1 观察的dom节点
+    const divNode=document.createElement('div')
     // 参数2 观察的选项(childList 观察子节点改变)
+    obs.observe(divNode,{childList:true})
     // 3. 修改元素内容
-
+    divNode.innerHTML='itheima 666'
+    console.log(2)
 
 
     // ------------- 异步任务3 setTimeout -------------
