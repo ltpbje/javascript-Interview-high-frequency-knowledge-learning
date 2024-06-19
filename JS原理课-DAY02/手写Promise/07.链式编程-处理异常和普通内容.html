@@ -34,7 +34,7 @@
     const PENDING = 'pending'
     const FULFILLED = 'fulfilled'
     const REJECTED = 'rejected'
-    class HMPromise {
+   class HMPromise {
       // 状态
       state = PENDING
       // 原因
@@ -67,38 +67,36 @@
         func(resolve, reject)
       }
 
+
       // then方法
       // 1. 返回新Promise实例
       // 2. 获取返回值
-      //    2.1 处理返回值
-      //    2.2 处理异常
+      //   2.1 处理返回值
+      //   2.2 处理异常
       then(onFulfilled, onRejected) {
         onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : x => x
         onRejected = typeof onRejected === 'function' ? onRejected : x => { throw x }
-
         // 1. 返回新Promise实例
-        const p2 = new HMPromise((resolve, reject) => {
+        const p2 = new HMPromise((resolve,reject)=>{
+          // 3. 使用封装函数
           if (this.state === FULFILLED) {
             runAsynctask(() => {
               // 2. 获取返回值
               try {
                 const x = onFulfilled(this.result)
-                // console.log('x:', x)
-                // 2.1 处理返回值
+                //  2.1 处理返回值
                 resolve(x)
               } catch (error) {
-                // 2.2 处理异常
-                // console.log('捕获异常:', error)
+                // 2.2处理异常
+                // console.log('捕获异常:',error)
                 reject(error)
               }
             })
-          }
-          else if (this.state === REJECTED) {
+          } else if (this.state === REJECTED) {
             runAsynctask(() => {
               onRejected(this.result)
             })
-          }
-          else if (this.state === PENDING) {
+          } else if (this.state === PENDING) {
             this.#handlers.push({
               onFulfilled: () => {
                 runAsynctask(() => {
@@ -111,12 +109,13 @@
               }
             })
           }
+        
 
-        })
-
+        }) 
         return p2
       }
     }
+  
 
 
     // ------------- 测试代码 -------------
