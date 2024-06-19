@@ -31,92 +31,105 @@
     const FULFILLED = 'fulfilled'
     const REJECTED = 'rejected'
     class HMPromise {
-      // 状态
-      state = PENDING
-      // 原因
-      result = undefined
-      // 回调函数数组
-      #handlers = [] // [{onFulfilled,onRejected}...]
+        // 状态
+        state = PENDING
+        // 原因
+        result = undefined
+        // 回调函数数组
+        #handlers = [] // [{onFulfilled,onRejected}...]
 
-      // 构造函数
-      constructor(func) {
-        // pending->fulfilled
-        const resolve = (result) => {
-          if (this.state === PENDING) {
-            this.state = FULFILLED
-            this.result = result
-            this.#handlers.forEach(({ onFulfilled }) => {
-              onFulfilled(this.result)
-            })
+        // 构造函数
+        constructor(func) {
+          // pending->fulfilled
+          const resolve = (result) => {
+            if (this.state === PENDING) {
+              this.state = FULFILLED
+              this.result = result
+              this.#handlers.forEach(({ onFulfilled }) => {
+                onFulfilled(this.result)
+              })
+            }
           }
-        }
-        // pending->rejected
-        const reject = (result) => {
-          if (this.state === PENDING) {
-            this.state = REJECTED
-            this.result = result
-            this.#handlers.forEach(({ onRejected }) => {
-              onRejected(this.result)
-            })
+          // pending->rejected
+          const reject = (result) => {
+            if (this.state === PENDING) {
+              this.state = REJECTED
+              this.result = result
+              this.#handlers.forEach(({ onRejected }) => {
+                onRejected(this.result)
+              })
+            }
           }
+          func(resolve, reject)
         }
-        func(resolve, reject)
-      }
 
-      // then方法
-      then(onFulfilled, onRejected) {
-        onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : x => x
-        onRejected = typeof onRejected === 'function' ? onRejected : x => { throw x }
 
-        const p2 = new HMPromise((resolve, reject) => {
-          if (this.state === FULFILLED) {
-            runAsynctask(() => {
-              try {
-                const x = onFulfilled(this.result)
-                // 1.处理返回Promise
-                if (x instanceof HMPromise) {
-                  // console.log('HMPromise实例')
-                  // 2. 调用then方法
-                  // x.then(res => console.log(res), err => console.log(err))
-                  x.then(res => resolve(res), err => reject(err))
-                } else {
-                  resolve(x)
+        // then方法
+        // 1. 返回新Promise实例
+        // 2. 获取返回值
+        //   2.1 处理返回值
+        //   2.2 处理异常
+        then(onFulfilled, onRejected) {
+          onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : x => x
+          onRejected = typeof onRejected === 'function' ? onRejected : x => { throw x }
+          // 1. 返回新Promise实例
+          const p2 = new HMPromise((resolve, reject) => {
+            // 3. 使用封装函数
+            if (this.state === FULFILLED) {
+              runAsynctask(() => {
+                // 2. 获取返回值
+                try {
+                  const x = onFulfilled(this.result)
+                  // 1.处理返回Promise
+                  if(x instanceof HMPromise){
+                    // console.log（'HMPromise实例')
+                    // 2.调用then方法
+                    // x.then(res=>console.log(res),err=>console.log(err))
+                    x.then(res=>resolve(res),err=>reject(err))
+
+                  }else{
+                    resolve(x)
+                  }
+                  
+                } catch (error) {
+                  // 2.2处理异常
+                  // console.log('捕获异常:',error)
+                  reject(error)
                 }
-              } catch (error) {
-                reject(error)
-              }
-            })
-          }
-          else if (this.state === REJECTED) {
-            runAsynctask(() => {
-              onRejected(this.result)
-            })
-          }
-          else if (this.state === PENDING) {
-            this.#handlers.push({
-              onFulfilled: () => {
-                runAsynctask(() => {
-                  onFulfilled(this.result)
-                })
-              }, onRejected: () => {
-                runAsynctask(() => {
-                  onRejected(this.result)
-                })
-              }
-            })
-          }
-        })
-        return p2
+              })
+            } else if (this.state === REJECTED) {
+              runAsynctask(() => {
+                onRejected(this.result)
+              })
+            } else if (this.state === PENDING) {
+              this.#handlers.push({
+                onFulfilled: () => {
+                  runAsynctask(() => {
+                    onFulfilled(this.result)
+                  })
+                }, onRejected: () => {
+                  runAsynctask(() => {
+                    onRejected(this.result)
+                  })
+                }
+              })
+            }
+
+
+          })
+          return p2
+        }
       }
-    }
+     
+     
     // ------------- 测试代码 手写Promise -------------
     const p = new HMPromise((resolve, reject) => {
       resolve(1)
     })
     p.then(res => {
       return new HMPromise((resolve, reject) => {
-        resolve(2)
-        // reject('error')
+        // resolve(2)
+        reject('error')
       })
     }).then(res => {
       console.log('p2:', res) // 2
