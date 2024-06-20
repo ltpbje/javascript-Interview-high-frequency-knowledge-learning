@@ -103,27 +103,30 @@
           }
 
           else if (this.state === PENDING) {
+            //1.处理异常
+            //2.获取返回值
+            //3.调用函数
             this.#handlers.push({
               onFulfilled: () => {
                 runAsynctask(() => {
-                  // 1. 处理异常
+                  //1.处理异常
                   try {
                     // 2.获取返回值
                     const x = onFulfilled(this.result)
                     // 3.调用函数
-                    resolvePromise(p2, x, resolve, reject)
+                    resolvePromise(p2,x,resolve,reject)
                   } catch (error) {
                     reject(error)
                   }
                 })
               }, onRejected: () => {
                 runAsynctask(() => {
-                  // 1. 处理异常
+                  //1.处理异常
                   try {
                     // 2.获取返回值
                     const x = onRejected(this.result)
                     // 3.调用函数
-                    resolvePromise(p2, x, resolve, reject)
+                    resolvePromise(p2,x,resolve,reject)
                   } catch (error) {
                     reject(error)
                   }
@@ -146,15 +149,15 @@
       }, 2000)
     })
     const p2 = p.then(res => {
-      // throw 'error'
+      throw 'error'
       // return p2
       // return 2
-      return new HMPromise((resolve, reject) => {
-        setTimeout(() => {
-          // resolve('resolve-2')
-          // reject('reject-2')
-        }, 2000);
-      })
+      // return new HMPromise((resolve, reject) => {
+      //   setTimeout(() => {
+      //     // resolve('resolve-2')
+      //     // reject('reject-2')
+      //   }, 2000);
+      // })
     })
 
     p2.then(res => {

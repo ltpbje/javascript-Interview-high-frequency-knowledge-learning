@@ -128,16 +128,16 @@
     }
 
     // 3. 抽取函数
-    function resolvePromise(p2, x, resolve, reject) {
-      if (x === p2) {
-        throw new TypeError('Chaining cycle detected for promise #<Promise>')
-      }
-      if (x instanceof HMPromise) {
-        x.then(res => resolve(res), err => reject(err))
-      } else {
-        resolve(x)
-      }
-    }
+   function resolvePromise(p2,x,resolve,reject){
+     if (x === p2) {
+       throw new TypeError('Chaining cycle detected for promise #<Promise>')
+     }
+     if (x instanceof HMPromise) {
+       x.then(res => resolve(res), err => reject(err))
+     } else {
+       resolve(x)
+     }
+   }
 
 
 
