@@ -74,10 +74,10 @@
               try {
                 const x = onFulfilled(this.result)
                 // 1. 处理重复引用
-                if (x === p2) {
+                if(p2===x){
                   // console.log('返回了p2')
                   // 2. 抛出错误 Chaining cycle detected for promise #<Promise>
-                  throw new TypeError('Chaining cycle detected for promise #<Promise>')
+                  throw new TypeError('Chaining cycle detected for promise #<Promise>') 
                 }
                 if (x instanceof HMPromise) {
                   x.then(res => resolve(res), err => reject(err))
