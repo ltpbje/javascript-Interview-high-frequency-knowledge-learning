@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <h2>链式编程-pengding状态</h2>
+  <h2>链式编程-pending状态</h2>
   <script>
     // 执行异步任务
     function runAsynctask(callback) {
@@ -149,15 +149,15 @@
       }, 2000)
     })
     const p2 = p.then(res => {
-      throw 'error'
+      // throw 'error'
       // return p2
       // return 2
-      // return new HMPromise((resolve, reject) => {
-      //   setTimeout(() => {
-      //     // resolve('resolve-2')
-      //     // reject('reject-2')
-      //   }, 2000);
-      // })
+      return new HMPromise((resolve, reject) => {
+        setTimeout(() => {
+          // resolve('resolve-2')
+          reject('reject-2')
+        }, 2000);
+      })
     })
 
     p2.then(res => {
