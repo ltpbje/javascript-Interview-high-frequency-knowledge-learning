@@ -74,8 +74,7 @@
         try {
           func(resolve, reject)
         } catch (error) {
-          // console.log('error:', error)
-          reject(error)
+           reject(error)         
         }
       }
 
@@ -141,6 +140,7 @@
        * 2. 处理异常
        * */
       catch(onRejected) {
+        
         // 1. 内部调用then方法
         return this.then(undefined, onRejected)
       }
