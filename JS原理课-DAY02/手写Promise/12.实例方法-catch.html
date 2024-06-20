@@ -149,8 +149,8 @@
 
     // ------------- 测试代码 手写Promise  -------------
     const p = new HMPromise((resolve, reject) => {
-      // reject('reject-error')
-      throw 'throw-error'
+      reject('reject-error')
+      // throw 'throw-error'
     })
 
     p.then(res => {

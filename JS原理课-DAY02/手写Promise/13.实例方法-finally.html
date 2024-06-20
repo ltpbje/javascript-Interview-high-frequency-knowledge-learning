@@ -142,9 +142,11 @@
        * finally方法
        * 1. 内部调用then方法
        * */
-      finally(onFinally) {
-        return this.then(onFinally, onFinally)
-      }
+      
+
+       finally(onFinally){
+         return this.then(onFinally,onFinally)
+       }
     }
 
 
