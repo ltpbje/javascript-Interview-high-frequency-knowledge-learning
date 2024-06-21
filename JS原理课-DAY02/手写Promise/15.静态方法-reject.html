@@ -160,7 +160,7 @@
       static reject(value) {
         // 1. 返回rejected状态的Promise
         // new HMPromise((resolve,reject)=>{
-        return new HMPromise((undefined, reject) => {
+        return new HMPromise((undefined,reject)=>{
           reject(value)
         })
       }
