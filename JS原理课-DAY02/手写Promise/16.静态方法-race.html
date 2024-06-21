@@ -168,17 +168,19 @@
        * */
       static race(promises) {
         // 1. 返回Promise
-        return new HMPromise((resolve, reject) => {
+        return new HMPromise((resolve,reject)=>{
           // 2. 判断是否为数组
-          if (!Array.isArray(promises)) {
+          if(!Array.isArray(promises)){
             return reject(new TypeError('Argument is not iterable'))
           }
           // 3. 等待第一个敲定
-          promises.forEach(p => {
+          promises.forEach(p=>{
             // p.then
-            HMPromise.resolve(p).then(res => { resolve(res) }, err => { reject(err) })
+            HMPromise.resolve(p).then(res=>{resolve(res)},err=>{reject(err)})
           })
         })
+         
+       
       }
 
     }
@@ -197,7 +199,7 @@
     })
 
     HMPromise.race([p1, p2]).then((res) => {
-      // HMPromise.race([p1, p2, 'itheima']).then((res) => {
+    // HMPromise.race([p1, p2, 'itheima']).then((res) => {
       // HMPromise.race().then((res) => {
       console.log('res:', res)
     }, err => {
