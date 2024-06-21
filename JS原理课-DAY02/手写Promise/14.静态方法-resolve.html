@@ -152,30 +152,31 @@
        * */
       static resolve(value) {
         // 1. 判断传入值
-        if (value instanceof HMPromise) {
+        if(value instanceof HMPromise){
           // 2.1 Promise直接返回
           return value
         }
+      
         // 2.2 转为Promise并返回(fulfilled状态)
         // return new HMPromise((resolve, reject) => {
-        return new HMPromise((resolve) => {
+       return new HMPromise((resolve,reject)=>{
           resolve(value)
-        })
+       })
       }
 
     }
 
 
     // ------------- 测试代码 手写Promise  -------------
-    HMPromise.resolve(new HMPromise((resolve, reject) => {
-      // resolve('resolve')
-      // reject('reject')
-      // throw 'error'
-    })).then(res => {
-      console.log('res:', res)
-    }, err => {
-      console.log('err:', err)
-    })
+    // HMPromise.resolve(new HMPromise((resolve, reject) => {
+    //   resolve('resolve')
+    //   // reject('reject')
+    //   // throw 'error'
+    // })).then(res => {
+    //   console.log('res:', res)
+    // }, err => {
+    //   console.log('err:', err)
+    // })
 
     HMPromise.resolve('itheima').then(res => {
       console.log(res)
