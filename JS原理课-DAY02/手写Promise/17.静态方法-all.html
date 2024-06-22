@@ -183,31 +183,24 @@
        *  5. 处理第一个拒绝
        * */
       static all(promises) {
+
         // 1. 返回Promise实例
         return new HMPromise((resolve, reject) => {
+          
           // 2. 判断是否为数组
           if (!Array.isArray(promises)) {
             return reject(new TypeError('Argument is not iterable'))
           }
+
           // 3. 空数组直接兑现
           promises.length === 0 && resolve(promises)
 
           // 4.1 记录结果
-          const results = []
-          let count = 0
-          promises.forEach((p, index) => {
-            HMPromise.resolve(p).then(
-              res => {
-                results[index] = res
+          
                 // 4.2 判断全部兑现
-                count++
-                count === promises.length && resolve(results)
-              },
-              err => {
+             
+           
                 // 5. 处理第一个拒绝
-                reject(err)
-              })
-          })
 
         })
       }
@@ -224,9 +217,9 @@
     })
     const p3 = 3
 
-    HMPromise.all([p1, p2, p3]).then(res => {
+    // HMPromise.all([p1, p2, p3]).then(res => {
       // HMPromise.all().then(res => {
-      // HMPromise.all([]).then(res => {
+      HMPromise.all([]).then(res => {
       console.log('res:', res)
     }, err => {
       console.log('err:', err)
