@@ -205,19 +205,38 @@
        * */
       static allSettled(promises) {
         // 1. 返回Promise
-        
+        return new HMPromise((resolve,reject)=>{
           // 2. 数组判断
-          
+          if(!Array.isArray(promises)){
+             return reject(new TypeError('Argument is not iterable'))
+          }
           // 3. 为空直接敲定
-        
+          promises.length===0 && resolve(promises)
 
           // 4. 等待全部敲定
           // 4.1 记录结果
-         
-              // 4.2 处理兑现{status:'fulfilled',value:''}
-            
-              // 4.3 处理拒绝{status:'rejected',reason:''}
-             
+          const results =[]
+          let count = 0
+          promises.forEach((p,index)=>{
+            HMPromise.resolve(p).then(
+              res=>{
+                // 4.2 处理兑现{status:'fulfilled',value:''}
+                results[index]= { status: FULFILLED, value: res }
+                count ++
+                count === promises.length && resolve(results)
+              },
+              err=>{
+                // 4.3 处理拒绝{status:'rejected',reason:''}
+               results[index] = { status: REJECTED, reason: err }
+                count++
+                count === promises.length && resolve(results)
+              }
+          )
+          })
+        })
+          
+        
+
     
       }
 
@@ -263,9 +282,9 @@
     //  *  4. 空数组,直接兑现
     //  *  5. 不传入数组,直接报错
     //  * */
-    // Promise.allSettled([p1, p2, p3]).then(res => {
+    // // Promise.allSettled([p1, p2, p3]).then(res => {
     //   // Promise.allSettled([]).then(res => {
-    //   // Promise.allSettled().then(res => {
+    //   Promise.allSettled().then(res => {
     //   console.log('res:', res)
     // }, err => {
     //   console.log('err:', err)
