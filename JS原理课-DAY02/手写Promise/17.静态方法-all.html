@@ -196,12 +196,23 @@
           promises.length === 0 && resolve(promises)
 
           // 4.1 记录结果
-          
+          const results=[]
+          let count = 0
+          promises.forEach((p,index)=>{
+            HMPromise.resolve(p).then(
+              res=>{
+                results[index]= res
                 // 4.2 判断全部兑现
-             
-           
+                count++ 
+                count=== promises.length && resolve(results)
+              },
+              err=>{
                 // 5. 处理第一个拒绝
-
+                reject(err)
+              }
+          )
+          })
+              
         })
       }
     }
@@ -211,15 +222,15 @@
     const p1 = HMPromise.resolve(1)
     const p2 = new HMPromise((resolve, reject) => {
       setTimeout(() => {
-        // resolve(2)
-        reject('error')
-      }, 1000)
+        resolve(2)
+        // reject('error')
+      }, 2000)
     })
     const p3 = 3
 
-    // HMPromise.all([p1, p2, p3]).then(res => {
+    HMPromise.all([p1, p2, p3]).then(res => {
       // HMPromise.all().then(res => {
-      HMPromise.all([]).then(res => {
+      // HMPromise.all([]).then(res => {
       console.log('res:', res)
     }, err => {
       console.log('err:', err)
