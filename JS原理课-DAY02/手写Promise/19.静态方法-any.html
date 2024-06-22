@@ -227,28 +227,10 @@
       */
       static any(promises) {
         // 1. 返回Promise,数组判断
-        return new HMPromise((resolve, reject) => {
-          if (!Array.isArray(promises)) {
-            return reject(new TypeError('Argument is not iterable'))
-          }
           // 2. 空数组直接拒绝
-          promises.length === 0 && reject(new AggregateError(promises, 'All promises were rejected'))
-
           // 3. 等待结果
-          const errors = []
-          let count = 0
-          promises.forEach((p, index) => {
-            HMPromise.resolve(p).then(res => {
               // 3.1 第一个兑现
-              resolve(res)
-            }, err => {
               // 3.2 全部拒绝
-              errors[index] = err
-              count++
-              count === promises.length && reject(new AggregateError(errors, 'All promises were rejected'))
-            })
-          })
-        })
       }
 
     }
