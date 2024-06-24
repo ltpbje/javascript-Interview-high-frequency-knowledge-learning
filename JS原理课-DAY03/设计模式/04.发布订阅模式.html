@@ -29,10 +29,10 @@
        */
       $on(event, callback) {
         // 1.2 保存事件
-        // if (this.#handlers[event] === undefined) {
-        //   this.#handlers[event] = []
-        // }
-        // this.#handlers[event].push(callback)
+        if (this.#handlers[event] === undefined) {
+          this.#handlers[event] = []
+        }
+        this.#handlers[event].push(callback)
       }
 
 
