@@ -14,20 +14,21 @@
     window.addEventListener('load', () => console.log('load触发1'))
     window.addEventListener('load', () => console.log('load触发2'))
     window.addEventListener('load', () => console.log('load触发3'))
+    window.addEventListener('load', () => console.log('load触发4'))
 
 
-    export default {
-      data() {
-        return {
-          message: '',
-        }
-      },
-      watch: {
-        message(newMes, oldMes) {
-          console.log('message-change')
-        }
-      },
-    }
+    // export default {
+    //   data() {
+    //     return {
+    //       message: '',
+    //     }
+    //   },
+    //   watch: {
+    //     message(newMes, oldMes) {
+    //       console.log('message-change')
+    //     }
+    //   },
+    // }
   </script>
 </body>
 
