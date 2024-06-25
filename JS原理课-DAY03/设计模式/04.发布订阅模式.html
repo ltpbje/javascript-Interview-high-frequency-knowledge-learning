@@ -44,7 +44,10 @@
       // 2.1 接收不定长参数
       $emit(event, ...args) {
         // 2.2 循环触发事件
-
+        const func = this.#handlers[event] || []
+        func.forEach(callBack => {
+          callBack(...args)
+        })
       }
 
       /**
@@ -80,8 +83,8 @@
     })
     // 触发事件
     document.querySelector('.emit').addEventListener('click', () => {
-      // bus.$emit('event1')
-      // bus.$emit('event2', 'itheima', '666')
+      bus.$emit('event1')
+      bus.$emit('event2', 'itheima', '666')
     })
     // 移除事件
     document.querySelector('.off').addEventListener('click', () => {
