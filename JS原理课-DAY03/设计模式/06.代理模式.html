@@ -25,24 +25,25 @@
     const cache = {}
     async function searchCity(pname) {
       // 2. 判断是否缓存数据
-
-      // 2.1 没有:查询,缓存,并返回
-      const res = await axios({
-        url: 'http://hmajax.itheima.net/api/city',
-        params: {
-          pname
-        }
-      })
-
-      return res.data.list
-
+      if (!cache[pname]) {
+        // 2.1 没有:查询,缓存,并返回
+        const res = await axios({
+          url: 'http://hmajax.itheima.net/api/city',
+          params: {
+            pname
+          }
+        })
+        cache[pname] = res.data.list
+      }
       // 2.2 有:直接返回
+      return cache[pname]
 
     }
 
     document.querySelector('.query').addEventListener('keyup', async function (e) {
       if (e.keyCode === 13) {
-        // console.log(this)
+        //  console.log(this) //this 是 document.querySelector('.query')
+
         const city = await searchCity(this.value)
         console.log(city)
       }
