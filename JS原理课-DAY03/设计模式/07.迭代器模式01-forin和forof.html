@@ -21,7 +21,9 @@
      *  1. 遍历的是索引
      *  2. 继承而来的也可以遍历出来(原型链上动态增加的也可以遍历)
      * */
-    
+    // for (const key in foods) {
+    //   console.log('key:', key)
+    // }
 
 
 
@@ -31,14 +33,16 @@
      * 1. 遍历的是值
      * 2. 继承而来的无法遍历
      * */
-   
+    for (const iterator of foods) {
+      console.log('iterator:', iterator)
+    }
 
-    // const obj = {
-    //   name: '西兰花炒蛋'
-    // }
-    // // for (const iterator of obj) {
-
-    // // }
+    const obj = {
+      name: '西兰花炒蛋'
+    }
+    for (const iterator of obj) {
+      console.log('key:', iterator)
+    }
     // for (const key in obj) {
     //   console.log('key:', key)
     // }
