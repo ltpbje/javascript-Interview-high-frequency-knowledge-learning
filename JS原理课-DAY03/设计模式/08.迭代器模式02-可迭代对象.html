@@ -27,29 +27,15 @@
       [Symbol.iterator]() {
 
         // ------------- 自己实现 -------------
-        const arr = ['北京', '上海', '广州', '深圳']
-        let index = 0
 
-        return {
-          next() {
-            if (index < arr.length) {
-              // 可以继续迭代
-              return { done: false, value: arr[index++] }
-            }
-            // 迭代完毕
-            return { done: true }
-          }
-        }
+        // 可以继续迭代
+
+        // 迭代完毕
+
 
 
         // ------------- 使用Generator -------------
-        // function* foodGenerator() {
-        //   yield '西兰花'
-        //   yield '花菜'
-        //   yield '西兰花炒蛋'
-        // }
-        // const food = foodGenerator()
-        // return food
+
       }
     }
 
