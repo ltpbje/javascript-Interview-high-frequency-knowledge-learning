@@ -1,4 +1,4 @@
-const myChart = echarts.init(document.querySelector('.main'))
+// const myChart = echarts.init(document.querySelector('.main'))
 
 const option = {
   title: {
@@ -25,6 +25,6 @@ myChart.setOption(option)
 
 // ------------- 更改图表大小 -------------
 window.addEventListener('resize', () => {
-  // console.log('resize触发')
-  myChart.resize()
+  console.log('resize触发')
+
 })
