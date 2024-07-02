@@ -24,8 +24,12 @@ myChart.setOption(option)
 
 
 // ------------- 更改图表大小 -------------
+let timerId
 window.addEventListener('resize', () => {
-  // console.log('resize触发')
-  myChart.resize()
+   clearTimeout(timerId)
+   timerId = setTimeout(() => {
+    console.log('resize触发')
+    myChart.resize()
+  }, 500);
 
 })

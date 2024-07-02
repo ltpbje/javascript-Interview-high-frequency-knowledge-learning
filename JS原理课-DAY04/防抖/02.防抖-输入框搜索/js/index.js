@@ -28,6 +28,9 @@ function renderCity(city) {
 // ------------- 输入框搜索 -------------
 let timeId
 document.querySelector('.search-city').addEventListener('input', function () {
+  clearTimeout(timeId)
+  timeId= setTimeout(() => {
     renderCity(this.value)
+  }, 500)
 })
 
