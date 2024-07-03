@@ -38,13 +38,15 @@ const func = function (e) {
   renderCity(this.value)
 }
 
-const debouncedFn = _.debounce(func, 500)
-
-document.querySelector('.search-city').addEventListener('input', debouncedFn)
 
 
 
+const debounceFn = _.debounce(func,500)
 
+
+
+
+document.querySelector('.search-city').addEventListener('input',debounceFn)
 
 
 
