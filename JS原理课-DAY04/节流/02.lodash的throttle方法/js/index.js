@@ -21,7 +21,6 @@ const func = function (e) {
   localStorage.setItem('currentTime', this.currentTime)
 }
 
-const throttleFn = _.throttle(func, 1000, { leading: false })
 
 video.addEventListener('timeupdate', throttleFn)
 
