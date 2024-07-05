@@ -1,4 +1,3 @@
-
 /**
  * 查询并渲染城市
  * @param {*} city 城市名
@@ -38,16 +37,16 @@ const func = function (e) {
 }
 
 function debounce(func, wait = 0) {
-  let timeId
+  let timerId
   return function (...args) {
     // console.log(this)
     const _this = this
-    // console.log(args)
-    clearTimeout(timeId)
-    timeId = setTimeout(function () {
-      func.apply(_this, args)
-    }, wait)
+    clearTimeout(timerId)
+    timerId = setTimeout(function () {
+      func.apply(_this,args)
+    },wait)
   }
+    // console.log(args)
 }
 
 const deFunc = debounce(func, 500)
