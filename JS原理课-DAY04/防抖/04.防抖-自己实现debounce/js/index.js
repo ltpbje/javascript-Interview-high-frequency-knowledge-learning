@@ -44,7 +44,7 @@ function debounce(func, wait = 0) {
     clearTimeout(timerId)
     timerId = setTimeout(function () {
       func.apply(_this,args)
-    },wait)
+    },wait) 
   }
     // console.log(args)
 }

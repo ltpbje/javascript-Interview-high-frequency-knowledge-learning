@@ -10,10 +10,10 @@ video.addEventListener('loadeddata', () => {
 //  播放时间改变会触发 timeupdate 事件
 let timeId
 video.addEventListener('timeupdate', function () {
+ 
   if (timeId !== undefined) {
-    return
+    return 
   }
-
   timeId = setTimeout(() => {
     console.log('timeupdate触发')
     localStorage.setItem('currentTime', this.currentTime)
