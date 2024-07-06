@@ -25,17 +25,15 @@ function throttle(func, wait = 0) {
     if (timeId !== undefined) {
       return
     }
-    // console.log(this)
-    // console.log(args)
-    const _this = this
+    const _this = this 
     timeId = setTimeout(() => {
-      func.apply(_this, args)
+      func.apply(_this , args)
       timeId = undefined
     }, wait)
   }
 }
 
-const throttleFn = throttle(func, 1000)
+const throttleFn = throttle(func, 3000)
 
 video.addEventListener('timeupdate', throttleFn)
 
