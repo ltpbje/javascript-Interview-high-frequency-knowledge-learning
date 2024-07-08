@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Color-Changing-Background</title>
+    <!-- <link rel="stylesheet" href="./index.css"> -->
+</head>
+
+<body>
+    <input class="colorValue" type="text" placeholder="请输入颜色值" style="height: 100px; width: 300px; ">
+    <input class="increValue" type="text" placeholder="请输入增量值" style="height: 100px; width: 300px; ">
+    <button class="start">start</button>
+    <button class="stop">stop</button>
+    <div class="box" style="height: 200px; width: 200px; border: 2px black solid;"></div>
+    <script>
+        const box = document.querySelector(".box");
+        const colorValue = document.querySelector(".colorValue");
+        const increValue = document.querySelector(".increValue");
+        const start = document.querySelector(".start");
+        const stop = document.querySelector(".stop");
+        let color = colorValue.value;
+        let incre = increValue.value;
+        let flag = 0;
+        let timer = null;
+        // 开始改变颜色
+        start.onclick = function () {
+            color = colorValue.value
+            // 修改box的背景颜色
+            box.style.backgroundColor = '' + color;
+            setTimeout(() => { }, 250)
+            timer = setInterval(() => {
+                // 颜色字符串中提取 RGB值
+                const rgb = box.style.backgroundColor.match(/\d+/g)
+                // console.log(rgb) // ['255', '250', '250']
+                // console.log(typeof box.style.backgroundColor) // string
+                // console.log(box.style.backgroundColor) //rgb(255, 250, 250)
+                // // 增量 转换为十进制
+                const increment = parseInt(document.querySelector('.increValue').value, 10) || 1
+                let newR = (((parseInt(rgb[0], 10)) + increment) % 256).toString(16)
+                let newG = (((parseInt(rgb[1], 10)) + increment) % 256).toString(16)
+                let newB = (((parseInt(rgb[2], 10)) + increment) % 256).toString(16)
+                // 确保每个颜色分量都是两位十六进制数
+                newR = newR.padStart(2, '0');
+                newG = newG.padStart(2, '0');
+                newB = newB.padStart(2, '0');
+                // console.log(newB);
+                // console.log(increment);
+                box.style.backgroundColor = `#${newR}${newG}${newB}`
+            }, 1000)
+
+        }
+
+
+    </script>
+</body>
+
+</html>
