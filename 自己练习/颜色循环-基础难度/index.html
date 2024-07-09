@@ -6,24 +6,35 @@
     <!-- <link rel="stylesheet" href="./index.css"> -->
 </head>
 
-<body>
-    <input class="colorValue" type="text" placeholder="请输入颜色值" style="height: 100px; width: 300px; ">
-    <input class="increValue" type="text" placeholder="请输入增量值" style="height: 100px; width: 300px; ">
-    <button class="start">start</button>
-    <button class="stop">stop</button>
-    <div class="box" style="height: 200px; width: 200px; border: 2px black solid;"></div>
-    <script>
-        const box = document.querySelector(".box");
-        const colorValue = document.querySelector(".colorValue");
-        const increValue = document.querySelector(".increValue");
-        const start = document.querySelector(".start");
-        const stop = document.querySelector(".stop");
-        let color = colorValue.value;
-        let incre = increValue.value;
-        let flag = 0;
-        let timer = null;
-        // 开始改变颜色
-        start.onclick = function () {
+<input class="colorValue" type="text" placeholder="请输入颜色值" style="height: 100px; width: 300px; ">
+增量值1:
+<input class="increValue1" type="text" placeholder="请输入增量值1">
+增量值2:
+<input class="increValue2" type="text" placeholder="请输入增量值2">
+增量值3:
+<input class="increValue3" type="text" placeholder="请输入增量值3">
+<button class="controllButton">start</button>
+<!-- <button class="stop">stop</button> -->
+<div class="box" style="height: 200px; width: 200px; border: 2px black solid;"></div>
+<script>
+    const box = document.querySelector(".box");
+    const colorValue = document.querySelector(".colorValue");
+    // const increValue = document.querySelector(".increValue");
+    const controllButton = document.querySelector(".controllButton");
+    // const stop = document.querySelector(".stop");
+    let color = colorValue.value;
+    // let incre = increValue.value;
+    let flag = 0;
+    let timer = null;
+    // 开始改变颜色
+    controllButton.onclick = function (e) {
+        if (e.target.innerText === 'start') {
+            console.log(e.target)
+            // 禁用颜色输入框
+            colorValue.disabled = true
+            // 将按钮变为stop
+            e.target.innerText = 'stop'
+            // 获取输入的颜色值
             color = colorValue.value
             // 修改box的背景颜色
             box.style.backgroundColor = '' + color;
@@ -35,10 +46,13 @@
                 // console.log(typeof box.style.backgroundColor) // string
                 // console.log(box.style.backgroundColor) //rgb(255, 250, 250)
                 // // 增量 转换为十进制
-                const increment = parseInt(document.querySelector('.increValue').value, 10) || 1
-                let newR = (((parseInt(rgb[0], 10)) + increment) % 256).toString(16)
-                let newG = (((parseInt(rgb[1], 10)) + increment) % 256).toString(16)
-                let newB = (((parseInt(rgb[2], 10)) + increment) % 256).toString(16)
+                const increment1 = parseInt(document.querySelector('.increValue1').value, 10) || 1
+                const increment2 = parseInt(document.querySelector('.increValue2').value, 10) || 1
+                const increment3 = parseInt(document.querySelector('.increValue3').value, 10) || 1
+                // rgb的每个值 加上 增量 increment
+                let newR = (((parseInt(rgb[0], 10)) + increment1) % 256).toString(16)
+                let newG = (((parseInt(rgb[1], 10)) + increment2) % 256).toString(16)
+                let newB = (((parseInt(rgb[2], 10)) + increment3) % 256).toString(16)
                 // 确保每个颜色分量都是两位十六进制数
                 newR = newR.padStart(2, '0');
                 newG = newG.padStart(2, '0');
@@ -46,12 +60,24 @@
                 // console.log(newB);
                 // console.log(increment);
                 box.style.backgroundColor = `#${newR}${newG}${newB}`
+                colorValue.value = `#${newR}${newG}${newB}`
             }, 1000)
-
+        } else if (e.target.innerText === 'stop') {
+            // 程序暂停时才可重新启用输入框
+            clearInterval(timer)
+            timer = null
+            // 启用颜色输入框
+            colorValue.disabled = false
+            e.target.innerText = 'start'
         }
+    }
 
-
-    </script>
+    stop.onclick = function () {
+        clearInterval(timer)
+        timer = null
+    }
+    colorValue
+</script>
 </body>
 
 </html>
