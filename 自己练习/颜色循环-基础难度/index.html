@@ -5,17 +5,26 @@
     <title>Color-Changing-Background</title>
     <!-- <link rel="stylesheet" href="./index.css"> -->
 </head>
-
+<p class="warning-message"></p>
 <input class="colorValue" type="text" placeholder="请输入颜色值" style="height: 100px; width: 300px; ">
-增量值1:
-<input class="increValue1" type="text" placeholder="请输入增量值1">
-增量值2:
-<input class="increValue2" type="text" placeholder="请输入增量值2">
-增量值3:
-<input class="increValue3" type="text" placeholder="请输入增量值3">
+<div class="increBox">
+    <div>
+        <span>增量值1:</span>
+        <input class="increValue1" type="text" placeholder="请输入增量值1">
+    </div>
+    <div>
+        <span>增量值2:</span>
+        <input class="increValue2" type="text" placeholder="请输入增量值2">
+    </div>
+    <div>
+        <span>增量值3:</span>
+        <input class="increValue3" type="text" placeholder="请输入增量值3">
+    </div>
+</div>
 <button class="controllButton">start</button>
 <!-- <button class="stop">stop</button> -->
 <div class="box" style="height: 200px; width: 200px; border: 2px black solid;"></div>
+
 <script>
     const box = document.querySelector(".box");
     const colorValue = document.querySelector(".colorValue");
@@ -71,12 +80,25 @@
             e.target.innerText = 'start'
         }
     }
-
-    stop.onclick = function () {
-        clearInterval(timer)
-        timer = null
-    }
-    colorValue
+    // 检测输入颜色数据是否是十六进制
+    colorValue.addEventListener('input', function () {
+        const warningMessage = document.querySelector('.warning-message')
+        console.log(this.value)
+        if (/^#[0-9A-F]{6}$/i.test(this.value)) {
+            warningMessage.innerText = ''
+            // Valid color
+            // 有效的颜色
+            currentColor = {
+                r: parseInt(this.value.substr(1, 2), 16),
+                g: parseInt(this.value.substr(3, 2), 16),
+                b: parseInt(this.value.substr(5, 2), 16)
+            }
+            box.style.backgroundColor = this.value
+        } else {
+            // 无效的颜色
+            warningMessage.innerText = '请输入正确的颜色值'
+        }
+    })
 </script>
 </body>
 
