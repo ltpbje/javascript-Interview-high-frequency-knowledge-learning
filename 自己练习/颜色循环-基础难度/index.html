@@ -20,6 +20,10 @@
         <span>增量值3:</span>
         <input class="increValue3" type="text" placeholder="请输入增量值3">
     </div>
+    <div>
+        <span>时间间隔</span>
+        <input class="intervalTime" type="text" placeholder="请输入时间间隔">
+    </div>
 </div>
 <button class="controllButton">start</button>
 <!-- <button class="stop">stop</button> -->
@@ -35,6 +39,8 @@
     // let incre = increValue.value;
     let flag = 0;
     let timer = null;
+    // 时间间隔输入框
+    const intervalTime = document.querySelector('.intervalTime')
     // 开始改变颜色
     controllButton.onclick = function (e) {
         if (e.target.innerText === 'start') {
@@ -70,7 +76,7 @@
                 // console.log(increment);
                 box.style.backgroundColor = `#${newR}${newG}${newB}`
                 colorValue.value = `#${newR}${newG}${newB}`
-            }, 1000)
+            }, +intervalTime.value || 250)
         } else if (e.target.innerText === 'stop') {
             // 程序暂停时才可重新启用输入框
             clearInterval(timer)
