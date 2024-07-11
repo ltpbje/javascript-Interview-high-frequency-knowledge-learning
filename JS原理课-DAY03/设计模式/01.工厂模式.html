@@ -56,6 +56,99 @@
       }
       return new User(name, age, career, work)
     }
+
+
+
+    //     好的，让我们用 ** 2W2H ** 的方式来介绍 ** 工厂模式 ** 在 JavaScript 中的应用。
+
+    // ### Why 🤔：与我何干？
+    //       工厂模式是一种常用的设计模式，它可以帮助我们简化代码，特别是当创建对象的过程变得复杂时。在 JavaScript 中，工厂模式可以让我们更加灵活地创建对象，而不需要关心对象的具体实现细节。
+
+    // ### What 📚：定义、概念解释
+    //         ** 工厂模式 ** 是一种创建型设计模式，它定义了一个创建对象的接口，但让子类决定实例化哪一个类。简单来说，就是通过一个工厂函数来封装对象的创建过程，而不需要直接使用 `new` 操作符来创建对象。
+
+    // ### How 🛠️：步骤流程方法
+    //       1. ** 定义工厂函数 **：这个函数会根据传入的参数来决定创建哪种类型的对象。
+    //       2. ** 创建具体产品类 **：这些类是工厂函数将要创建的对象的具体实现。
+    //       3. ** 使用工厂函数 **：调用工厂函数并传入必要的参数，获取创建的对象。
+
+    // #### 举例：
+    //       ```javascript
+    // // 定义一个工厂函数
+    // function createAnimal(type) {
+    //   if (type === 'dog') {
+    //     return new Dog();
+    //   } else if (type === 'cat') {
+    //     return new Cat();
+    //   }
+    // }
+
+    // // 定义具体的产品类
+    // class Dog {
+    //   makeSound() {
+    //     return 'Woof!';
+    //   }
+    // }
+
+    // class Cat {
+    //   makeSound() {
+    //     return 'Meow!';
+    //   }
+    // }
+
+    // // 使用工厂函数
+    // const myDog = createAnimal('dog');
+    // console.log(myDog.makeSound()); // 输出: Woof!
+    // ```
+
+    // ### How Good 🏆：可以给听众带来什么好处
+    //       使用工厂模式的好处包括：
+    // - ** 解耦 **：对象的创建和使用被分离，降低了代码间的依赖。
+    // - ** 灵活性 **：可以根据不同的条件创建不同的对象，而不需要修改使用对象的代码。
+    // - ** 可维护性 **：当需要添加新的对象类型时，只需扩展工厂函数和相应的产品类，而不需要修改已有的代码。
+
+    //       现在，如果你觉得这个解释太简单或者太复杂，可以告诉我调整难度等级。如果需要更简单的解释，请输入 `-`；如果需要更详细的解释，请输入 `+`。
+
+
+
+
+    // 抽象工厂
+    // 抽象类 
+    // 设备工厂抽象类
+    class DeviceFactory {
+      createPhone() { }
+      createComputer() { }
+    }
+
+    // 实现类
+    // 华为工厂实现类 
+    class HuaweiFactory extends DeviceFactory {
+      createPhone() {
+        return console.log('pura 70', 'mate 60 pro')
+      }
+      createComputer() {
+        return console.log('matepad11.5s', 'matebook');
+      }
+    }
+
+    // 实现类
+    // 小米工厂实现类 
+    class XiaomiFactory extends DeviceFactory {
+      createPhone() {
+        return console.log('redmi k70', 'mi6');
+      }
+      createComputer() {
+        return console.log('小米电脑')
+      }
+    }
+
+    const huaWeiFactory = new HuaweiFactory()
+    huaWeiFactory.createPhone()
+
+    const xiaomiFactory = new XiaomiFactory()
+    xiaomiFactory.createPhone()
+
+
   </script>
 </body>
 
