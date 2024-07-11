@@ -31,6 +31,31 @@
       this.color = color
     }
     const f3 = new Food('西兰花', '黄绿色')
+
+
+
+    //  工厂模式 例子
+
+    function User(name, age, career, work) {
+      this.name = name
+      this.age = age
+      this.career = career
+      this.work = work
+    }
+    // 工厂模式
+
+    function Factory(name, age, career) {
+      let work
+      switch (career) {
+        case '老板':
+          work = ["喝茶", "看报", "撩技师"]
+          break
+        case 'SPA技师':
+          work = ["SPA按摩", "日式SPA", "泰式SPA"]
+          break
+      }
+      return new User(name, age, career, work)
+    }
   </script>
 </body>
 
