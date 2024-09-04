@@ -66,9 +66,10 @@ class EventEmitter{
     }
 }
 
-
+// 创建一个 EventEmitter 类的实例 ev, 用于处理事件的发布和订阅
 const ev = new EventEmitter()
 
+// 定义三个函数作为事件的处理程序
 function handler1() {
     console.log('handler1');
 }
@@ -76,13 +77,23 @@ function handler1() {
 function handler2() {
     console.log('handler2');
 }
+
 function handler3() {
     console.log('handler3');
 }
 
+// 使用 on 方法订阅 'test' 事件，并将 handler1 函数作为事件处理程序
 ev.on('test',handler1)
+
+// 使用 once 方法订阅 'test' 事件，并将 handler2 函数作为事件处理程序。这个处理程序只会被执行一次
 ev.once('test',handler2)
+
+// 再次使用 on 方法订阅 'test' 事件，并将 handler3 函数作为事件处理程序
 ev.on('test',handler3)
 
+// 触发 'test' 事件，这将导致所有订阅 'test' 事件的处理程序被执行
+ev.trigger('test')
+
+// 再次触发 'test' 事件。这将导致再次执行所有订阅 'test' 事件的处理程序，包括那些被标记为只执行一次的处理程序（如 handler2）。
 ev.trigger('test')
 ev.trigger('test')
