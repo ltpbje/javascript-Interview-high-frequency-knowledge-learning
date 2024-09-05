@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    /* 水平居中对齐 */
+    justify-content: center;
+    /* 垂直居中对齐 */
+    align-items: center;
+    height: 100vh;
+}
+
+.container{
+    display: flex;
+    width: 90vw;
+}
+.container .panel{
+    background-size: cover;
+    background-repeat: no-repeat;
+        /* 背景图片覆盖整个元素 */
+    height: 80vh;
+    /* 设置弹性盒子的伸缩比例 */
+    flex: 0.5;
+    margin: 5px;
+    border-radius: 50px;
+    position: relative;
+    transition: all 1s ease-in;
+}
+
+.panel h3{
+    font-size: 24px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    margin: 0;
+    color: aliceblue;
+    opacity: 0;
+}
+
+.panel.active{
+   flex: 5;
+
+}
+
+.panel.active h3{
+    opacity: 1;
+    /* 设置透明度变化的过渡效果，持续时间为0.3s，过渡方式为ease-in，延迟时间为0.4s */
+    transition: opacity 0.3s ease-in 0.4s;
+}
