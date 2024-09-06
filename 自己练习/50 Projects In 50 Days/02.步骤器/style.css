@@ -58,27 +58,91 @@ body{
 }
 
 
-.progress{
+/* 定义进度条样式 */
+.progress {
+    /* 设置进度条的背景颜色为变量 --line-border-fill 的值 */
     background-color: var(--line-border-fill);
+    /* 绝对定位，相对于最近的已定位的祖先元素 */
     position: absolute;
+    /* 将元素的顶部边缘置于容器的垂直中心 */
     top: 50%;
+    /* 将元素的左侧边缘对齐容器的左侧 */
     left: 0;
+    /* 使用 transform 属性将元素沿Y轴向上移动自身高度的50%，实现垂直居中 */
     transform: translateY(-50%);
+    /* 设置元素的高度为4px */
     height: 4px;
+    /* 设置元素的宽度为0%，即初始宽度为0，可以动态改变以表示进度 */
     width: 0%;
+    /* 设置元素的堆叠顺序，z-index -1 使其位于容器内容的下方 */
     z-index: -1;
+    /* 设置过渡效果，当宽度变化时，过渡时间为0.4秒，过渡效果为ease */
     transition: 0.4s ease;
 }
 
-.circle{
-    background-color:#f1f1f1;
+/* 定义圆形元素样式 */
+.circle {
+    /* 设置圆形元素的背景颜色 */
+    background-color: #f1f1f1;
+    /* 设置圆形元素的文字颜色 */
     color: #e2e2e2;
+    /* 设置元素的边框半径为50%，使其呈现圆形 */
     border-radius: 50%;
+    /* 设置元素的高度为30px */
     height: 30px;
+    /* 设置元素的宽度为30px */
     width: 30px;
+    /* 使用flex布局，使内容水平和垂直居中 */
     display: flex;
+    /* 垂直居中对齐flex容器中的子元素 */
     align-items: center;
+    /* 水平居中对齐flex容器中的子元素 */
     justify-content: center;
+    /* 设置元素的边框宽度为3px，颜色为变量 --line-border-empty 的值 */
     border: 3px solid var(--line-border-empty);
-    transition: 0.4 ease;
+    /* 设置过渡效果，当背景颜色或边框颜色变化时，过渡时间为0.4秒，过渡效果为ease */
+    transition: 0.4s ease;
+}
+
+.circle.active{
+    border-color: var(--line-border-fill);
+}
+
+/* 定义按钮样式 */
+.btn {
+    /* 设置按钮的背景颜色为变量 --line-border-fill 的值 */
+    background-color: var(--line-border-fill);
+    /* 设置按钮的文字颜色为白色 */
+    color: #fff;
+    /* 移除按钮的边框 */
+    border: 0;
+    /* 设置按钮的边框圆角为6px */
+    border-radius: 6px;
+    /* 将鼠标悬停在按钮上时的光标设置为指针形状 */
+    cursor: pointer;
+    /* 继承父元素的字体族 */
+    font-family: inherit;
+    /* 设置按钮内部的填充，上下为8px，左右为30px */
+    padding: 8px 30px;
+    /* 设置按钮的外边距，上下左右为5px */
+    margin: 5px;
+    /* 设置按钮的文字大小为14px */
+    font-size: 14px;
+}
+
+/* 定义按钮被点击时的样式 */
+.btn:active {
+    /* 使用 transform 属性的 scale 函数，将按钮的缩放比例设置为 0.98 */
+    /* 这会使按钮在被点击时稍微缩小，产生一种被按下的效果 */
+    transform: scale(0.98);
+}
+
+/* 定义按钮获得焦点时的样式 */
+.btn:focus {
+    /* 移除按钮获得焦点时浏览器默认的轮廓线 */
+    outline: 0;
+}
+.btn:disabled{
+    background-color: var(--line-border-empty);
+    cursor: not-allowed ;
 }
