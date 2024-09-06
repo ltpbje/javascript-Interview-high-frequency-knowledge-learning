@@ -24,7 +24,7 @@ body{
     margin: 5px;
     border-radius: 50px;
     position: relative;
-    transition: all 1s ease-in;
+    transition: all 0.7s ease-in;
 }
 
 .panel h3{

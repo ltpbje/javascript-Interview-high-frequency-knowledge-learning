@@ -1,0 +1,84 @@
+/* 定义根元素的样式 */
+:root {
+    /* 定义线条边框的填充颜色 */
+    --line-border-fill: #3498db;
+    /* 定义线条边框的空颜色 */
+    --line-border-empty: #383838;
+
+}
+
+*{
+    box-sizing: border-box;
+
+}
+
+body{
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+/* 将容器内的文本居中 */
+.container{
+    text-align: center;
+}
+
+.progress-container{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 100%;
+    width: 350px;
+}
+
+.progress-container::before{
+/* 伪元素内容为空 */
+    content: '';
+    /* 设置背景颜色为变量 --line-border-empty 的值 */
+    background-color: var(--line-border-empty);
+    /* 绝对定位，相对于最近的已定位的祖先元素 */
+    position: absolute;
+    /* 将元素的顶部边缘置于容器的垂直中心 */
+    top: 50%;
+    /* 将元素的左侧边缘对齐容器的左侧 */
+    left: 0;
+    /* 使用 transform 属性将元素沿Y轴向上移动自身高度的50%，实现垂直居中 */
+    transform: translateY(-50%);
+    /* 设置元素的高度为4px */
+    height: 4px;
+    /* 设置元素的宽度为100%，即与容器的宽度相同 */
+    width: 100%;
+    /* 设置元素的堆叠顺序，z-index -1 使其位于容器内容的下方 */
+    z-index: -1;
+}
+
+
+.progress{
+    background-color: var(--line-border-fill);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 0%;
+    z-index: -1;
+    transition: 0.4s ease;
+}
+
+.circle{
+    background-color:#f1f1f1;
+    color: #e2e2e2;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--line-border-empty);
+    transition: 0.4 ease;
+}
